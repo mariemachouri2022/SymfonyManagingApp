@@ -1,0 +1,47 @@
+<p>{{aa}}</p>
+{% if a is not defined or a|length == 0 %}
+<p>Le tableau n'est pas défini ou vide</p>
+{%endif%}
+<table>
+<tr>
+<td>ID</td>
+<td>PICTURE</td>
+<td>USERNAME</td>
+<td>EMAIL</td>
+<td>NB_BOOKS</td>
+
+</tr>
+{% for element in a %}
+
+<tr>
+<td>{{element.id}}</td>
+
+<td><img src="{{element.picture}}" style="width:30px"> </img></td>
+<td>{{element.username | upper}}</td>
+<td>{{element.email}}</td>
+<td>{{element.nb_books}}</td>
+<td><a href={{path('app_author_delete',{id:element.id})}}>delete</a></td>
+<td><a href={{path('app_author_update',{id:element.id})}}>Update</a></td>
+<td><a href={{path('app_details',{id:element.id})}}>Details</td>
+</tr>
+{%endfor%}
+</table>
+<br>
+ <ul>
+        {% for author in a %}
+            <li>{{ author.username }}</li>
+        {% endfor %}
+    </ul>
+    
+    <p>Nombre d'auteurs : {{ a|length }}</p>
+    <br>
+    <ul>
+        {% for author in a %}
+            <li>{{ author.username }} - {{ author.nb_books }} livres</li>
+        {% endfor %}
+    </ul>
+    
+    <p>Nombre total de livres de tous les auteurs : {{ totalBooks }}</p>
+
+
+

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+{% set nbpublished = 0 %}
+{% set nbunpublished = 0 %}
+    
+    <table>
+    <tr>
+    <th>Ref</th>
+    <th>Title</th>
+    <th>Category</th>
+    <th>Publication Date:</th>
+    <th>Author:</th>
+    <th>Published:</th>
+    <th>Action</th>
+    </tr>
+
+    {%for b in books%}
+    {% if b.published == true %}
+    {% set nbpublished = nbpublished + 1 %}
+<tr> 
+<td>{{b.ref}}</td>  
+<td>{{b.title}}</td>
+<td>{{b.category}}</td>
+<td>{{b.publicationDate | date}}</td>
+<td>{{b.idAuthor.username}}</td>
+<td>{{b.published}}</td>
+<td><a href = "{{path('app_book_update',{id:b.ref})}}">Update</a></td>
+<td><a href="{{path('app_book_delete',{id:b.ref})}}">delete</a></td>
+</tr>
+{% else %}
+{% set nbunpublished = nbunpublished+1 %}
+{% endif %}
+{% endfor %}
+    </table>
+    Number of published books : {{nbpublished}}
+    Number of unpublished books : {{nbunpublished}}
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/Users/MAYYEM/FirstProject/src/Controller/BookController.php'|file_link(0) }}">src/Controller/BookController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/Users/MAYYEM/FirstProject/templates/book/index.html.twig'|file_link(0) }}">templates/book/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

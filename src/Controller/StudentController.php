@@ -12,6 +12,9 @@ class StudentController extends AbstractController {
     public function index(): Response {
          return new Response("Bonjour mes étudiants");
     }
-
+    #[Route('/goToIndex', name: 'app_go_to_index')]
+    public function goToIndex(): RedirectResponse {
+         return $this->redirectToRoute('app_student');
+    }
 }
 ?>
